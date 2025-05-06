@@ -1,6 +1,9 @@
 <?php
+require_once('pagetitle.php');
+$page_title = SL_SIGNUP_PAGE;
+
 require_once('dbconnection.php');
-require_once('queryutil.php');
+require_once('queryutils.php');
 session_start();
 
 $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME)
@@ -13,11 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = trim($_POST['user_name']);
     $display_name = trim($_POST['display_name']);
     $password = $_POST['password'];
-    $access = 'user';
+    $access = 'user'; // Force normal user level
 
     if (!empty($username) && !empty($display_name) && !empty($password)) {
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
-        $query = "INSERT INTO user(user_name, display_name, password_hash, access) VALUES (?, ?, ?, ?)";
+        $query = "INSERT INTO user (user_name, display_name, password_hash, access) VALUES (?, ?, ?, ?)";
         $result = parameterizedQuery($dbc, $query, 'ssss', $username, $display_name, $password_hash, $access);
 
         if ($result) {
@@ -34,12 +37,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sign-up</title>
+    <title><?= $page_title ?></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 </head>
 <body>
+<?php include('navmenu.php'); ?>
 <div class="container mt-5">
-    <h2>Sign Up</h2>
+    <h2><?= $page_title ?></h2>
 
     <?php if (!empty($error_message)) : ?>
         <div class="alert alert-danger"><?= htmlspecialchars($error_message) ?></div>
