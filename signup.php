@@ -3,7 +3,7 @@ require_once('pagetitle.php');
 $page_title = SL_SIGNUP_PAGE;
 
 require_once('dbconnection.php');
-require_once('queryutils.php');
+require_once('queryutil.php');
 session_start();
 
 $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME)
