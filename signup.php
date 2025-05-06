@@ -12,7 +12,7 @@ $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME)
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = trim($_POST['user_name']);
     $password = $_POST['password'];
-    $access = $_POST['access'];
+    $access = 'user';
 
     if (!empty($username) && !empty($password) && !empty($access)) {
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
@@ -40,14 +40,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
 <!-- <?php include('navmenu.php'); ?> -->
-<form method="post">
-    Username: <input type="text" name="user_name" required><br>
-    Password: <input type="password" name="password" required><br>
-    Access: 
-    <select name="access">
-        <option value="user">User</option>
-        <option value="admin">Admin</option>
-    </select><br>
-    <input type="submit" value="Sign Up">
+<div class="container mt-5">
+    <h2>Sign Up</h2>
+
+    <?php if (!empty($error_message)) : ?>
+        <div class="alert alert-danger"><?= htmlspecialchars($error_message) ?></div>
+    <?php endif; ?>
+
+    <?php if (!empty($success_message)) : ?>
+        <div class="alert alert-success"><?= $success_message ?></div>
+    <?php endif; ?>
+
+    <form method="post" class="form-group">
+        <label>Username:</label>
+        <input type="text" name="user_name" class="form-control" required>
+
+        <label>Password:</label>
+        <input type="password" name="password" class="form-control" required>
+        
+        <br>
+        <input type="submit" value="Sign Up" class="btn btn-primary">
+    </form>
+</div>
 </form>
 </body>
