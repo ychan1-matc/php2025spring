@@ -32,16 +32,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!DOCTYPE html>
 <html>
 <head>
-    <title><?= $page_title?></title>
+    <!-- <title><?= $page_title?></title> -->
+   <title>log-in</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 </head>
 <body>
 <!-- <?php include('navmenu.php'); ?> -->
-<form method="post">
-    Username: <input type="text" name="user_name" required><br>
-    Password: <input type="password" name="password" required><br>
-    <input type="submit" value="Login">
-</form>
+<div class="container mt-5">
+    <h2>Login</h2>
+    <?php if (!empty($error_message)) : ?>
+        <div class="alert alert-danger"><?= htmlspecialchars($error_message) ?></div>
+    <?php endif; ?>
+    <form method="post" class="form-group">
+        <label>Username:</label>
+        <input type="text" name="user_name" class="form-control" required>
+        <label>Password:</label>
+        <input type="password" name="password" class="form-control" required>
+        <br>
+        <input type="submit" value="Login" class="btn btn-primary">
+    </form>
+    <p>Create new account <a href='signup.php'>here</a>.</p>
+</div>
 </br>
 <p class='nav-link'>Create new account <a href='signup.php'> HERE</a></p>
 </body>
