@@ -6,12 +6,6 @@ $require_admin = true;
 require_once('authorizeaccess.php');
 require_once('dbconnection.php');
 require_once('queryutil.php');
-
-
-if ($_SESSION['access_privileges'] !== 'admin') {
-    header("Location: unauthorizedaccess.php");
-    exit;
-}
 ?>
 
 <!DOCTYPE html>
