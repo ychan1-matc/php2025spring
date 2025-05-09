@@ -27,7 +27,7 @@ session_start();
       </p>
 
       <div class="mb-3">
-        <?php if ($_SESSION['access_privileges'] === 'admin'): ?>
+        <?php if ($_SESSION['access'] === 'admin'): ?>
           <a href="adminpanel.php" class="btn btn-danger">Go to Admin Panel</a>
         <?php else: ?>
           <a href="adddiary.php" class="btn btn-primary">Upload a New Diary</a>
@@ -41,7 +41,7 @@ session_start();
 
     <?php
     // Show user's own diary entries if they are NOT an admin
-    if (isset($_SESSION['user_id']) && $_SESSION['access_privileges'] !== 'admin') {
+    if (isset($_SESSION['user_id']) && $_SESSION['access'] !== 'admin') {
       $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME)
           or trigger_error('Error connecting to MySQL server for ' . DB_NAME, E_USER_ERROR);
 

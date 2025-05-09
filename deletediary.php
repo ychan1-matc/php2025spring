@@ -8,7 +8,7 @@ require_once('queryutil.php');
 require_once('diaryimageutil.php');
 
 $user_id = $_SESSION['user_id'];
-$user_access = $_SESSION['access_privileges'];
+$user_access = $_SESSION['access'];
 ?>
 
 <!DOCTYPE html>
